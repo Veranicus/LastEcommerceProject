@@ -20,6 +20,17 @@
     </properties>
 
     <dependencies>
+        <!-- exclude logback , add log4j2 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -40,12 +51,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -85,11 +90,11 @@
             <scope>runtime</scope>
         </dependency>
         <!-- Needed for Async Logging with Log4j 2 -->
-        <dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-            <version>3.4.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.lmax</groupId>-->
+<!--            <artifactId>disruptor</artifactId>-->
+<!--            <version>3.4.0</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
         <!--    <dependency>-->

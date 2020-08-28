@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserController {
 
-    private static final Logger log = LogManager.getLogger(UserController.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserController.class);
 
 
     private UserRepository userRepository;
@@ -56,18 +56,18 @@ public class UserController {
 	public ResponseEntity<User> createUser(@RequestBody CreateUserRequest createUserRequest) {
         User user = new User();
         user.setUsername(createUserRequest.getUsername());
-        log.info("Username set with {} ", createUserRequest.getUsername());
+        LOGGER.info("Username set with {} ", createUserRequest.getUsername());
         Cart cart = new Cart();
         cartRepository.save(cart);
         user.setCart(cart);
         if (createUserRequest.getPassword().length() < 7 || !createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
             System.out.println("Wrong password...");
-            log.error("Creation of User with username {} fails ", createUserRequest.getUsername());
+            LOGGER.error("Creation of User with username {} fails ", createUserRequest.getUsername());
             return ResponseEntity.badRequest().build();
         }
         user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
         userRepository.save(user);
-        log.info("User {} created. ", createUserRequest.getUsername());
+        LOGGER.info("User {} created. ", createUserRequest.getUsername());
         return ResponseEntity.ok(user);
     }
 
@@ -75,10 +75,10 @@ public class UserController {
     public ResponseEntity<User> loginUser(@RequestBody LoginUserRequest loginUserRequest) {
         User user = new User();
         user.setUsername(loginUserRequest.getUsername());
-        log.info("User {} logs in ", loginUserRequest.getUsername());
+        LOGGER.info("User {} logs in ", loginUserRequest.getUsername());
         if (loginUserRequest.getPassword().length() < 7) {
             System.out.println("Wrong password...");
-            log.error("Login of User with username {} fails ", loginUserRequest.getUsername());
+            LOGGER.error("Login of User with username {} fails ", loginUserRequest.getUsername());
             return ResponseEntity.badRequest().build();
         }
         user.setPassword(bCryptPasswordEncoder.encode(loginUserRequest.getPassword()));
@@ -86,7 +86,7 @@ public class UserController {
         } else {
             return ResponseEntity.badRequest().build();
         }
-        log.info("User {} logged. ", loginUserRequest.getUsername());
+        LOGGER.info("User {} logged. ", loginUserRequest.getUsername());
         return ResponseEntity.ok(user);
     }
 
