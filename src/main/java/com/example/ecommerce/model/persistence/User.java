@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 
 @Entity
@@ -62,5 +63,17 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", cart=" + cart +
+				", hash=" + Arrays.toString(hash) +
+				'}';
 	}
 }
